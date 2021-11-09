@@ -15,7 +15,7 @@ class AddForeignKey extends Migration
     {
         Schema::table('groups', function (Blueprint $table) {
             $table->foreign('leader_id')->references('id')->on('users');
-            $table->foreign('group_chat_id')->references('id')->on('group_chat');
+            // $table->foreign('group_chat_id')->references('id')->on('group_chat');
             $table->foreign('style_id')->references('id')->on('mst_style');
             $table->foreign('game_id')->references('id')->on('mst_game');
         });

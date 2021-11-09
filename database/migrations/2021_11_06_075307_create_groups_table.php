@@ -21,7 +21,7 @@ class CreateGroupsTable extends Migration
             $table->integer('capacity')->comment('定員');
             $table->integer('recruitment')->comment('募集人数');
             $table->string('description')->comment('グループの説明');
-            $table->integer('group_chat_id')->unsigned()->comment('グループチャットのルームid');
+            // $table->integer('group_chat_id')->unsigned()->comment('グループチャットのルームid');
             $table->integer('style_id')->unsigned()->comment('グループのスタイル、スタイルテーブルのidと紐づく');
             $table->integer('game_id')->unsigned()->comment('グループで活動するゲーム、ゲームテーブルのidと紐づく');
             $table->timestamps();
