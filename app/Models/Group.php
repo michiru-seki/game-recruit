@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
+use App\Models\MstStyle;
+use App\Models\MstGame;
 
 class Group extends Model
 {
@@ -22,4 +25,19 @@ class Group extends Model
         'style_id',
         'game_id',
     ];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'leader_id', 'id');
+    }
+
+    public function mstStyle()
+    {
+        return $this->belongsTo(MstStyle::class, 'style_id', 'id');
+    }
+
+    public function mstGame()
+    {
+        return $this->belongsTo(MstGame::class, 'game_id', 'id');
+    }
 }
