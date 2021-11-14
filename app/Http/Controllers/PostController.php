@@ -27,6 +27,25 @@ class PostController extends Controller
         }
     }
 
+    public function getPostDetail(Request $request)
+    {
+        try {
+            Log::info('投稿データ取得開始');
+            $post = Post::with(['groupDetail.groupMember.user:id,icon,user_name', 'groupDetail.mstStyle', 'groupDetail.mstGame'])->get();
+            Log::info('投稿データ取得終了');
+
+            return response(["results" => $post], 200);
+        } catch (\Exception $e) {
+            $message = '投稿データを取得できませんでした';
+            Log::error($e);
+            Log::error($message);
+            return response([
+                "error" => $e,
+                "message" => $message,
+            ], 500);
+        }
+    }
+
     public function upsertPost(Request $request)
     {
         try {
