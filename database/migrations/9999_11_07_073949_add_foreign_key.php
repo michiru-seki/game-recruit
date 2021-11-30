@@ -28,10 +28,11 @@ class AddForeignKey extends Migration
         Schema::table('friends', function (Blueprint $table) {
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('friend_user_id')->references('id')->on('users');
+            $table->foreign('private_room_id')->references('id')->on('private_rooms');
         });
 
         Schema::table('private_chat', function (Blueprint $table) {
-            $table->foreign('private_room_id')->references('id')->on('friends');
+            $table->foreign('private_room_id')->references('id')->on('private_rooms');
             $table->foreign('user_id')->references('id')->on('users');
         });
 
@@ -62,6 +63,11 @@ class AddForeignKey extends Migration
         Schema::table('group_chat', function (Blueprint $table) {
             $table->foreign('group_id')->references('id')->on('groups');
             $table->foreign('user_id')->references('id')->on('users');
+        });
+        
+        Schema::table('readed_group_chat', function (Blueprint $table) {
+            $table->foreign('group_chat_id')->references('id')->on('group_chat');
+            $table->foreign('read_user_id')->references('id')->on('users');
         });
     }
 

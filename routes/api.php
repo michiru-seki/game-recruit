@@ -10,6 +10,12 @@ Route::get('/group/member/{id}', [App\Http\Controllers\GroupController::class, '
 Route::get('/game/styles', [App\Http\Controllers\GameStyleController::class, 'getGameStyles']);
 Route::get('/post/{id}', [App\Http\Controllers\PostController::class, 'getPost']);
 Route::get('/post/detail/all', [App\Http\Controllers\PostController::class, 'getPostDetail']);
+Route::get('/messages/private/{room_id}', [App\Http\Controllers\MessageController::class, 'getPrivateMessages']);
+Route::get('/messages/group/{group_id}', [App\Http\Controllers\MessageController::class, 'getGroupMessages']);
 
 Route::post('/group/edit', [App\Http\Controllers\GroupController::class, 'editGroup']);
 Route::post('/post/upsert', [App\Http\Controllers\PostController::class, 'upsertPost']);
+Route::post('/private/chat/insert', [App\Http\Controllers\MessageController::class, 'createPrivateMessage']);
+Route::post('/group/chat/insert', [App\Http\Controllers\MessageController::class, 'createGroupMessage']);
+Route::post('/read/upsert', [App\Http\Controllers\ReadController::class, 'upsertRead']);
+Route::post('/read/group/upsert', [App\Http\Controllers\ReadController::class, 'upsertReadGroup']);

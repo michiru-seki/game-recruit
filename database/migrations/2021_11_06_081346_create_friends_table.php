@@ -17,6 +17,7 @@ class CreateFriendsTable extends Migration
             $table->increments('id')->comment('プライマリーキー');
             $table->integer('user_id')->unsigned()->comment('usersテーブルのidと紐づく');
             $table->integer('friend_user_id')->unsigned()->comment('users_idとの友達を示す、usersテーブルのidと紐づく');
+            $table->integer('private_room_id')->unsigned()->comment('友達とのチャットのルームid、private_roomsテーブルのidと紐づく');
             $table->timestamps();
         });
     }
