@@ -15,7 +15,7 @@ class CreatePrivateChatTable extends Migration
     {
         Schema::create('private_chat', function (Blueprint $table) {
             $table->increments('id')->comment('プライマリーキー');
-            $table->integer('private_room_id')->unsigned()->comment('友達とのチャットのルームid、friendsテーブルのidと紐づく');
+            $table->integer('private_room_id')->unsigned()->comment('友達とのチャットのルームid、private_roomsテーブルのidと紐づく');
             $table->integer('user_id')->unsigned()->comment('誰のメッセージかを示す、usersテーブルのidと紐づく');
             $table->string('message')->nullable()->comment('メッセージ');
             $table->string('image')->nullable()->comment('画像のパス');
