@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
+use App\Models\GroupMember;
 use App\Models\MstStyle;
 use App\Models\MstGame;
 
@@ -29,6 +30,11 @@ class Group extends Model
     public function user()
     {
         return $this->belongsTo(User::class, 'leader_id', 'id');
+    }
+
+    public function groupMember()
+    {
+        return $this->hasMany(GroupMember::class, 'group_id', 'id');
     }
 
     public function mstStyle()
