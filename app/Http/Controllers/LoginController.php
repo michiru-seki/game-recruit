@@ -6,40 +6,82 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 use function Psy\debug;
 
 class LoginController extends Controller
 {
-
     public function register(Request $request)
     {
+        // バリデーション
+        $this->validate($request, User::$rules, User::$messages);
 
-        $user = User::create([
-            'user_name' => $request->name,
-            'password' => Hash::make($request->password),
-        ]);
+        try {
+            Log::info('ユーザー登録処理開始');
+            
+            $user = User::create([
+                'user_name' => $request->user_name,
+                'password' => Hash::make($request->password),
+            ]);
+    
+            Log::info('ユーザー登録処理終了');
 
-        return response(["results" => $user], 200);
+            return response(["results" => $user], 200);
+        } catch (\Exception $e) {
+            $message = 'ユーザーの登録ができませんでした';
+            Log::error($e);
+            Log::error($message);
+            return response([
+                "error" => $e,
+                "message" => $message,
+            ], 500);
+        }
     }
 
     public function login(Request $request)
     {
-        $userName = $request->name;
-        $userPassword = $request->password;
+        // バリデーション
+        $rules = array(
+            'user_name' => 'required',
+            'password' => 'required',
+        );
+    
+        $messages = array(
+            'user_name.required' => '＊ユーザーネームが入力されていません',
+            'password.required' => '＊パスワードが入力されていません',
+        );
 
-        Log::debug($userPassword);
-        $userData = User::Where('user_name', $userName)
-            ->Where('password', $userPassword)
-            ->first();
-        
-        if(empty($userData)){
-            return response(500);
-        };
-        
-        Log::debug($userData);
+        $this->validate($request, $rules, $messages);
 
+        try {
+            Log::info('ログイン処理開始');
+            $userName = $request->user_name;
+            $userPassword = $request->password;
 
-        return response(["results" => $userData]);
+            Log::info($userName);
+            Log::info($userPassword);
+            
+            if(!(Auth::attempt($request->only('user_name', 'password')))){
+                $message = 'ユーザー情報が見つかりませんでした';
+                Log::error($message);
+                return response([
+                    "message" => $message,
+                ], 422);
+            };      
+    
+            Log::info('ログイン処理終了');
+
+            return response(["results" => Auth::user()]);
+        } catch (\Exception $e) {
+            $message = 'ログインが正常に完了できませんでした';
+            Log::error($e);
+            Log::error($message);
+            return response([
+                "error" => $e,
+                "message" => $message,
+            ], 500);
+        }
     }
+
 }

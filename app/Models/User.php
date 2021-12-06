@@ -20,4 +20,19 @@ class User extends Authenticatable
         'game',
         'introduction',
     ];
+
+    public static $rules = array(
+        'user_name' => 'required|unique:users',
+        'password' => 'required|min:6',
+        'icon' => '',
+        'game' => '',
+        'introduction' => '',
+    );
+
+    public static $messages = array(
+        'user_name.required' => '＊ユーザーネームは必須です',
+        'user_name.unique' => '＊そのユーザーネームは既に使用されています',
+        'password.required' => '＊パスワードは必須です',
+        'password.min' => '＊パスワードは6文字以上で設定してください',
+    );
 }
