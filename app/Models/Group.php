@@ -19,12 +19,29 @@ class Group extends Model
         'group_name',
         'leader_id',
         'icon',
-        'capacity',
+        'participants',
         'recruitment',
         'description',
-        'group_chat_id',
         'style_id',
         'game_id',
+    ];
+
+    public static $rules = [
+        'group_name' => 'required',
+        'leader_id' => 'required',
+        'icon' => 'required',
+        'recruitment' => 'required',
+        'style_id' => 'required|numeric',
+        'game_id' => 'required|numeric',
+    ];
+
+    public static $messages = [
+        'group_name.required' => 'グループ名は必須です',
+        'leader_id.required' => 'leader_idは必須です',
+        'icon.required' => 'アイコンは必須です',
+        'recruitment.required' => '募集人数は必須です',
+        'style_id.required' => 'チームスタイルは必須です',
+        'game_id.required' => 'ゲーム名は必須です',
     ];
 
     public function user()

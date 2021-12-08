@@ -32,7 +32,7 @@ class GroupFactory extends Factory
             'group_name' => $this->faker->userName(),
             'leader_id' => rand(1, $userCount),
             'icon' => $this->faker->url(),
-            'capacity' => $this->faker->numberBetween(5, 10),
+            'participants' => $this->faker->numberBetween(5, 10),
             'recruitment' => $this->faker->numberBetween(1, 5),
             'description' => $this->faker->text(150),
             // 'group_chat_id' => $groupCount,
