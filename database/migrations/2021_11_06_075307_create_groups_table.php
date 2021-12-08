@@ -18,7 +18,7 @@ class CreateGroupsTable extends Migration
             $table->string('group_name', '256')->comment('グループ名');
             $table->integer('leader_id')->unsigned()->comment('グループの親のID、usersテーブルのidと紐づく');
             $table->string('icon', '256')->nullable()->comment('グループのアイコン');
-            $table->integer('capacity')->comment('定員');
+            $table->integer('participants')->comment('参加人数');
             $table->integer('recruitment')->comment('募集人数');
             $table->string('description')->comment('グループの説明');
             // $table->integer('group_chat_id')->unsigned()->comment('グループチャットのルームid');

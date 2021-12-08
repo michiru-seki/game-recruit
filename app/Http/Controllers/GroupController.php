@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Group;
 use App\Models\GroupMember;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 
 class GroupController extends Controller
 {
@@ -84,6 +85,54 @@ class GroupController extends Controller
             return response(["results" => $group], 200);
         } catch (\Exception $e) {
             $message = 'グループ情報を編集できませんでした';
+            Log::error($e);
+            Log::error($message);
+            return response([
+                "error" => $e,
+                "message" => $message,
+            ], 500);
+        }
+    }
+
+    public function createGroup(Request $request)
+    {
+        $this->validate($request, Group::$rules, Group::$messages);
+        try {
+            // $request->test = 'test';
+            Log::info('グループ作成開始');
+            // リクエストから画像ファイルを取得
+            $image = $request->file('icon');
+
+            if($image) {
+                // バケットのimagesフォルダへアップロード
+                $path = Storage::disk('s3')->put('icon', $image, 'public');
+                $url = Storage::disk('s3')->url($path);
+            } else {
+                $url = null;
+            }
+
+            $group = Group::create([
+                'group_name' => $request->group_name,
+                'leader_id' => $request->leader_id,
+                'icon' => $url,
+                'participants' => 1,
+                'recruitment' => $request->recruitment,
+                'description' => $request->description,
+                'style_id' => $request->style_id,
+                'game_id' => $request->game_id,
+            ]);
+
+            // グループメンバー作成
+            GroupMember::create([
+                'group_id' => $group->id,
+                'user_id' => $group->leader_id,
+            ]);
+
+            Log::info('グループ作成終了');
+
+            return response(["results" => $group], 200);
+        } catch (\Exception $e) {
+            $message = 'グループを作成できませんでした';
             Log::error($e);
             Log::error($message);
             return response([
