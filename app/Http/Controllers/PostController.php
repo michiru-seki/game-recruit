@@ -31,7 +31,7 @@ class PostController extends Controller
     {
         try {
             Log::info('投稿データ取得開始');
-            $post = Post::with(['groupDetail.groupMember.user:id,icon,user_name', 'groupDetail.mstStyle', 'groupDetail.mstGame'])->where('status_flag', 0)->get();
+            $post = Post::with(['groupDetail.groupMember.user:id,icon,user_name', 'groupDetail.mstStyle', 'groupDetail.mstGame'])->where('status_flag', 0)->orderBy('updated_at', 'desc')->get();
             Log::info('投稿データ取得終了');
 
             return response(["results" => $post], 200);
