@@ -19,9 +19,10 @@ Route::get('/group/member/{id}', [App\Http\Controllers\GroupController::class, '
 Route::get('/game/styles', [App\Http\Controllers\GameStyleController::class, 'getGameStyles']);
 Route::get('/game/names', [App\Http\Controllers\GameNameController::class, 'getGameNames']);
 Route::get('/post/{id}', [App\Http\Controllers\PostController::class, 'getPost']);
-Route::get('/post/detail/all', [App\Http\Controllers\PostController::class, 'getPostDetail']);
+Route::get('/post/detail/all/{user_id}', [App\Http\Controllers\PostController::class, 'getPostDetail']);
 Route::get('/messages/private/{room_id}', [App\Http\Controllers\MessageController::class, 'getPrivateMessages']);
 Route::get('/messages/group/{group_id}', [App\Http\Controllers\MessageController::class, 'getGroupMessages']);
+Route::get('/post/favorite/{user_id}', [App\Http\Controllers\FavoriteController::class, 'getFavorite']);
 
 Route::post('/group/edit', [App\Http\Controllers\GroupController::class, 'editGroup']);
 Route::post('/group/create', [App\Http\Controllers\GroupController::class, 'createGroup']);
@@ -30,3 +31,4 @@ Route::post('/private/chat/insert', [App\Http\Controllers\MessageController::cla
 Route::post('/group/chat/insert', [App\Http\Controllers\MessageController::class, 'createGroupMessage']);
 Route::post('/read/upsert', [App\Http\Controllers\ReadController::class, 'upsertRead']);
 Route::post('/read/group/upsert', [App\Http\Controllers\ReadController::class, 'upsertReadGroup']);
+Route::post('/favorite/upsert', [App\Http\Controllers\FavoriteController::class, 'upsertFavorite']);
