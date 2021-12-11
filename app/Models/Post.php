@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\Group;
 use App\Models\MstGame;
 use App\Models\MstStyle;
+use App\Models\Favorite;
 
 class Post extends Model
 {
@@ -48,5 +49,10 @@ class Post extends Model
             'id',
             'style_id',
         );
+    }
+
+    public function favorite()
+    {
+        return $this->hasMany(Favorite::class, 'post_id', 'id');
     }
 }
