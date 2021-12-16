@@ -23,6 +23,7 @@ Route::get('/post/detail/all/{user_id}', [App\Http\Controllers\PostController::c
 Route::get('/messages/private/{room_id}', [App\Http\Controllers\MessageController::class, 'getPrivateMessages']);
 Route::get('/messages/group/{group_id}', [App\Http\Controllers\MessageController::class, 'getGroupMessages']);
 Route::get('/post/favorite/{user_id}', [App\Http\Controllers\FavoriteController::class, 'getFavorite']);
+Route::get('/mypage/{user_id}', [App\Http\Controllers\MypageController::class, 'getUserDetail']);
 
 Route::post('/group/edit', [App\Http\Controllers\GroupController::class, 'editGroup']);
 Route::post('/group/create', [App\Http\Controllers\GroupController::class, 'createGroup']);
@@ -32,3 +33,4 @@ Route::post('/group/chat/insert', [App\Http\Controllers\MessageController::class
 Route::post('/read/upsert', [App\Http\Controllers\ReadController::class, 'upsertRead']);
 Route::post('/read/group/upsert', [App\Http\Controllers\ReadController::class, 'upsertReadGroup']);
 Route::post('/favorite/upsert', [App\Http\Controllers\FavoriteController::class, 'upsertFavorite']);
+Route::post('/mypage/edit', [App\Http\Controllers\MypageController::class, 'updateUserDetail']);
