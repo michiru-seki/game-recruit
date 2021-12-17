@@ -24,6 +24,7 @@ Route::get('/messages/private/{room_id}', [App\Http\Controllers\MessageControlle
 Route::get('/messages/group/{group_id}', [App\Http\Controllers\MessageController::class, 'getGroupMessages']);
 Route::get('/post/favorite/{user_id}', [App\Http\Controllers\FavoriteController::class, 'getFavorite']);
 Route::get('/mypage/{user_id}', [App\Http\Controllers\MypageController::class, 'getUserDetail']);
+Route::get('/subscriptions/{user_id}/{post_id}', [App\Http\Controllers\SubscriptionController::class, 'getSubscription']);
 
 Route::post('/group/edit', [App\Http\Controllers\GroupController::class, 'editGroup']);
 Route::post('/group/create', [App\Http\Controllers\GroupController::class, 'createGroup']);
@@ -34,3 +35,4 @@ Route::post('/read/upsert', [App\Http\Controllers\ReadController::class, 'upsert
 Route::post('/read/group/upsert', [App\Http\Controllers\ReadController::class, 'upsertReadGroup']);
 Route::post('/favorite/upsert', [App\Http\Controllers\FavoriteController::class, 'upsertFavorite']);
 Route::post('/mypage/edit', [App\Http\Controllers\MypageController::class, 'updateUserDetail']);
+Route::post('/subscriptions', [App\Http\Controllers\SubscriptionController::class, 'joinRequest']);

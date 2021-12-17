@@ -31,7 +31,7 @@ class GroupFactory extends Factory
         return [
             'group_name' => $this->faker->userName(),
             'leader_id' => rand(1, $userCount),
-            'icon' => $this->faker->url(),
+            'icon' => null,
             'participants' => $this->faker->numberBetween(5, 10),
             'recruitment' => $this->faker->numberBetween(1, 5),
             'description' => $this->faker->text(150),

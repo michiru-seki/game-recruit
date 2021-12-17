@@ -17,7 +17,7 @@ class CreatePostSubscriptionsTable extends Migration
             $table->increments('id')->comment('プライマリーキー');
             $table->integer('user_id')->unsigned()->comment('募集投稿に応募したユーザーのid、usersテーブルのidと紐づく');
             $table->integer('post_id')->unsigned()->comment('募集投稿を出しているグループのid、groupsテーブルのidと紐づく');
-            $table->integer('status_flag')->comment('参加許可または拒否を示す、0=許可、1=拒否');
+            $table->integer('status_flag')->comment('参加許可または拒否を示す、0=許可、1=拒否、2=保留');
             $table->timestamps();
         });
     }
