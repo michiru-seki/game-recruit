@@ -32,7 +32,6 @@ class MypageController extends Controller
     public function updateUserDetail(Request $request)
     {
         try {
-            Log::debug($request);
             $userId = $request->id;
             Log::info('ユーザー情報更新開始');
             // リクエストから画像ファイルを取得
@@ -41,16 +40,13 @@ class MypageController extends Controller
             $user = User::where('id', $userId)->first();
 
             if($image) {
-                Log::debug('1');
                 // バケットのimagesフォルダへアップロード
                 $path = Storage::disk('s3')->put('icon', $image, 'public');
                 $url = Storage::disk('s3')->url($path);
             } else {
                 if($user->icon === $request->icon) {
-                    Log::debug('2');
                     $url = $request->icon;
                 } else {
-                    Log::debug('3');
                     $url = null;
                 }
             }

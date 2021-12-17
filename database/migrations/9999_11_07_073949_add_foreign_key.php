@@ -57,6 +57,7 @@ class AddForeignKey extends Migration
         });
 
         Schema::table('notifications', function (Blueprint $table) {
+            $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('post_subscription_id')->references('id')->on('post_subscriptions');
         });
         
