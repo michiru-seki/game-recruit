@@ -24,18 +24,16 @@ class GroupFactory extends Factory
      */
     public function definition()
     {
-        $userCount = User::count();
         $styleCount = MstStyle::count();
         $gameCount = MstGame::count();
         // $groupCount = Group::count() + 1;
         return [
             'group_name' => $this->faker->userName(),
-            'leader_id' => rand(1, $userCount),
+            'leader_id' => 1,
             'icon' => null,
-            'participants' => $this->faker->numberBetween(5, 10),
+            'participants' => 1,
             'recruitment' => $this->faker->numberBetween(1, 5),
             'description' => $this->faker->text(150),
-            // 'group_chat_id' => $groupCount,
             'style_id' => rand(1, $styleCount),
             'game_id' => rand(1, $gameCount),
         ];
