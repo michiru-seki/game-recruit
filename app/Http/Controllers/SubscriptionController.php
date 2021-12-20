@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\PostSubscription;
 use App\Models\Notification;
 use App\Models\User;
+use App\Models\Post;
 use Illuminate\Support\Facades\Log;
 use App\Constants\Message;
 
@@ -37,9 +38,11 @@ class SubscriptionController extends Controller
         try {
             $userId = $request->user_id;
             $postId = $request->post_id;
+            $leaderId = $request->leader_id;
 
             $requestUser = User::select('user_name')->where('id', $userId)->first();
-            $notificationMessage = $requestUser->user_name . Message::GROUP_JOIN_REQUEST;
+            $post = Post::with('groupDetail')->where('id', $postId)->first();
+            $notificationMessage = $requestUser->user_name . Message::GROUP_JOIN_REQUEST($post->groupDetail->group_name);
 
             Log::info('応募情報登録開始');
             $subscription = PostSubscription::updateOrCreate(['user_id' => $userId, 'post_id' => $postId], [
@@ -49,7 +52,8 @@ class SubscriptionController extends Controller
             ]);
 
             Notification::create([
-                'user_id' => $userId,
+                'user_id' => $leaderId,
+                'request_user_id' => $userId,
                 'post_subscription_id' => $subscription->id,
                 'read_status' => 0,
                 'message' => $notificationMessage,

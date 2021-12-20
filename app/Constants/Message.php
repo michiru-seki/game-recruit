@@ -4,5 +4,8 @@ namespace App\Constants;
 
 class Message
 {
-    const GROUP_JOIN_REQUEST = "さんからグループへの参加リクエストが来ています";
+    public static function GROUP_JOIN_REQUEST($groupName)
+    {
+        return "さんから" . $groupName . "への参加リクエストが来ています";
+    }
 }
