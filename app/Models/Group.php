@@ -27,21 +27,28 @@ class Group extends Model
     ];
 
     public static $rules = [
-        'group_name' => 'required',
+        'group_name' => 'required|max:256',
         'leader_id' => 'required',
-        'icon' => 'required',
-        'recruitment' => 'required',
+        'icon' => 'file|mimes:jpg,png,webp,svg',
+        'recruitment' => 'required|numeric',
         'style_id' => 'required|numeric',
         'game_id' => 'required|numeric',
+        'description' => 'required',
     ];
 
     public static $messages = [
-        'group_name.required' => 'グループ名は必須です',
+        'group_name.required' => '＊グループ名は必須です',
+        'group_name.max' => '＊グループ名は256文字以内で設定してください',
         'leader_id.required' => 'leader_idは必須です',
-        'icon.required' => 'アイコンは必須です',
-        'recruitment.required' => '募集人数は必須です',
-        'style_id.required' => 'チームスタイルは必須です',
+        'icon.file' => 'アイコンはファイルを選択してください',
+        'icon.mimes' => 'アイコンは画像ファイルを選択してください',
+        'recruitment.required' => '＊募集人数は必須です',
+        'recruitment.numeric' => '＊募集人数は数字を指定してください',
+        'style_id.required' => '＊スタイルは必須です',
+        'style_id.numeric' => '＊スタイルは選択肢から選んでください',
         'game_id.required' => 'ゲーム名は必須です',
+        'game_id.numeric' => '＊スタイルは選択肢から選んでください',
+        'description.required' => '＊ゲーム名は必須です',
     ];
 
     public function user()

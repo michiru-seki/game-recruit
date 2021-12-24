@@ -72,8 +72,29 @@ class GroupController extends Controller
 
     public function editGroup(Request $request)
     {
+        // バリデーション
+        $rules = array(
+            'group_name' => 'required|max:256',
+            'recruitment' => 'required|numeric',
+            'style_id' => 'required|numeric',
+            'description' => 'required',
+        );
+    
+        $messages = array(
+            'group_name.required' => '＊グループ名は必須です',
+            'group_name.max' => '＊グループ名は256文字以内で設定してください',
+            'recruitment.required' => '＊募集人数は必須です',
+            'recruitment.numeric' => '＊募集人数は数字を指定してください',
+            'style_id.required' => '＊スタイルは必須です',
+            'style_id.numeric' => '＊スタイルは選択肢から選んでください',
+            'description.required' => '＊ゲーム名は必須です',
+        );
+
+        $this->validate($request, $rules, $messages);
+
         try {
             Log::info('グループ情報編集開始');
+            Log::debug($request);
             $group = Group::find($request->id);
             $group->group_name = $request->group_name;
             $group->style_id = $request->style_id;

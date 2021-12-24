@@ -48,8 +48,8 @@ class LoginController extends Controller
         );
     
         $messages = array(
-            'user_name.required' => '＊ユーザーネームが入力されていません',
-            'password.required' => '＊パスワードが入力されていません',
+            'user_name.required' => '＊ユーザー名を入力してください',
+            'password.required' => '＊パスワードが入力してください',
         );
 
         $this->validate($request, $rules, $messages);
@@ -63,7 +63,7 @@ class LoginController extends Controller
             Log::info($userPassword);
             
             if(!(Auth::attempt($request->only('user_name', 'password')))){
-                $message = 'ユーザー情報が見つかりませんでした';
+                $message = '＊ユーザー名またはパスワードが違います';
                 Log::error($message);
                 return response([
                     "message" => $message,
