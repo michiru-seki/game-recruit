@@ -22,11 +22,11 @@ class User extends Authenticatable
     ];
 
     public static $rules = array(
-        'user_name' => 'required|unique:users',
+        'user_name' => 'required|unique:users|max:256',
         'password' => 'required|min:6',
-        'icon' => '',
-        'game' => '',
-        'introduction' => '',
+        'icon' => 'file|mimes:jpg,png,webp,svg',
+        'game' => 'max:5000',
+        'introduction' => 'max:5000',
     );
 
     public static $messages = array(
