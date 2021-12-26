@@ -33,7 +33,7 @@ class Group extends Model
         'recruitment' => 'required|numeric',
         'style_id' => 'required|numeric',
         'game_id' => 'required|numeric',
-        'description' => 'required',
+        'description' => 'required|max:5000',
     ];
 
     public static $messages = [
@@ -49,6 +49,7 @@ class Group extends Model
         'game_id.required' => 'ゲーム名は必須です',
         'game_id.numeric' => '＊スタイルは選択肢から選んでください',
         'description.required' => '＊ゲーム名は必須です',
+        'description.max' => '＊詳細は5000文字以内で設定してください',
     ];
 
     public function user()

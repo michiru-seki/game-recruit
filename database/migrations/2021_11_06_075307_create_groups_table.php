@@ -20,8 +20,7 @@ class CreateGroupsTable extends Migration
             $table->string('icon', '256')->nullable()->comment('グループのアイコン');
             $table->integer('participants')->comment('参加人数');
             $table->integer('recruitment')->comment('募集人数');
-            $table->string('description')->comment('グループの説明');
-            // $table->integer('group_chat_id')->unsigned()->comment('グループチャットのルームid');
+            $table->string('description', '5000')->comment('グループの説明');
             $table->integer('style_id')->unsigned()->comment('グループのスタイル、スタイルテーブルのidと紐づく');
             $table->integer('game_id')->unsigned()->comment('グループで活動するゲーム、ゲームテーブルのidと紐づく');
             $table->timestamps();

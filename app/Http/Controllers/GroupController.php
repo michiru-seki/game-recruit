@@ -77,7 +77,7 @@ class GroupController extends Controller
             'group_name' => 'required|max:256',
             'recruitment' => 'required|numeric',
             'style_id' => 'required|numeric',
-            'description' => 'required',
+            'description' => 'required|max:5000',
         );
     
         $messages = array(
@@ -88,6 +88,7 @@ class GroupController extends Controller
             'style_id.required' => '＊スタイルは必須です',
             'style_id.numeric' => '＊スタイルは選択肢から選んでください',
             'description.required' => '＊ゲーム名は必須です',
+            'description.max' => '＊詳細は5000文字以内で設定してください',
         );
 
         $this->validate($request, $rules, $messages);
