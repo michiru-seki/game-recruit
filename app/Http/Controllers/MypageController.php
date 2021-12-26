@@ -45,7 +45,7 @@ class MypageController extends Controller
                 $url = Storage::disk('s3')->url($path);
             } else {
                 if($user->icon === $request->icon) {
-                    $url = $request->icon;
+                    $url = $user->icon;
                 } else {
                     $url = null;
                 }
