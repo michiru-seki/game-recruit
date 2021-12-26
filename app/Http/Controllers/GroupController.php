@@ -94,10 +94,28 @@ class GroupController extends Controller
         $this->validate($request, $rules, $messages);
 
         try {
+            $groupId = $request->id;
             Log::info('グループ情報編集開始');
-            Log::debug($request);
+            // リクエストから画像ファイルを取得
+            $image = $request->file('icon');
+
+            $group = Group::where('id', $groupId)->first();
+
+            if($image) {
+                // バケットのimagesフォルダへアップロード
+                $path = Storage::disk('s3')->put('icon', $image, 'public');
+                $url = Storage::disk('s3')->url($path);
+            } else {
+                if($group->icon === $request->icon) {
+                    $url = $group->icon;
+                } else {
+                    $url = null;
+                }
+            }
+
             $group = Group::find($request->id);
             $group->group_name = $request->group_name;
+            $group->icon = $url;
             $group->style_id = $request->style_id;
             $group->recruitment = $request->recruitment;
             $group->description = $request->description;
