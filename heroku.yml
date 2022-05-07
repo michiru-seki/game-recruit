@@ -1,0 +1,43 @@
+setup:
+  config:
+    APP_NAME: Game Recruit
+    APP_ENV: production
+    APP_KEY: base64:3UeGkWXUkLu8Ux+ZESHz0UdbMIOE9py+oIW1CB1ddvY=
+    APP_DEBUG: false
+    APP_URL: app
+
+    LOG_CHANNEL: stack
+
+    DB_CONNECTION: mysql
+    DB_HOST: db
+    DB_PORT: 3306
+    DB_DATABASE: laravel_db
+    DB_USERNAME: root
+    DB_PASSWORD: root
+
+    BROADCAST_DRIVER: pusher
+    CACHE_DRIVER: file
+    QUEUE_CONNECTION: sync
+    SESSION_DRIVER: file
+    SESSION_LIFETIME: 120
+
+    REDIS_HOST: 127.0.0.1
+    REDIS_PASSWORD: null
+    REDIS_PORT: 6379
+
+    AWS_ACCESS_KEY_ID: AKIAYJ75GIGRXKD5CUNN
+    AWS_SECRET_ACCESS_KEY: 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
+    AWS_DEFAULT_REGION: ap-northeast-1
+    AWS_BUCKET: game-recruit
+
+    PUSHER_APP_ID: 1302739
+    PUSHER_APP_KEY: 12eaa957c8aac9f71905
+    PUSHER_APP_SECRET: 20a8d3949b0da676bd3f
+    PUSHER_APP_CLUSTER: ap3
+build:
+  docker:
+    web: ./docker/app/Dockerfile
+  config:
+    WORKDIR: app
+run:
+  web: php artisan serve
